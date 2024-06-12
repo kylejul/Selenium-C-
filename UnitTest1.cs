@@ -1,11 +1,12 @@
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using SeleniumC_.Helpers;
 
 namespace SeleniumC_
 {
     public class Tests
     {
-        public IWebDriver _driver;
+        private IWebDriver _driver;
 
         [SetUp]
         public void Setup()
