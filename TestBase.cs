@@ -1,27 +1,20 @@
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using SeleniumC_.Helpers;
 
 namespace SeleniumC_
 {
-    public class Tests
+    public class TestBase
     {
-        private IWebDriver _driver;
+        protected IWebDriver _driver;
 
-        [SetUp]
+        [OneTimeSetUp]
         public void Setup()
         {
             var driverPath = Environment.GetEnvironmentVariable("ChromeDriverPath");
             _driver = new ChromeDriver(driverPath);
         }
 
-        [Test]
-        public void Test1()
-        {
-            _driver.Navigate().GoToUrl("https://webdriveruniversity.com/index.html");
-        }
-
-        [TearDown]
+        [OneTimeTearDown]
         public void TearDown()
         {
             _driver.Close();
