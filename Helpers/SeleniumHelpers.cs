@@ -17,5 +17,18 @@ namespace SeleniumC_.Helpers
             bool isVisible = element.Displayed;
             return isVisible;
         }
+
+        public static void WaitToBeVisible(IWebDriver driver, By locator ,int waitTimeout = 10)
+        {
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(waitTimeout));
+            wait.Until(ExpectedConditions.ElementIsVisible(locator));
+        }
+
+        public static void WaitForDOMToLoad(IWebDriver driver)
+        {
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(15));
+            wait.Until(d => ((IJavaScriptExecutor)d).ExecuteScript("return document.readyState").Equals("complete"));
+        }
+
     }
 }

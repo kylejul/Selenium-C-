@@ -1,34 +1,46 @@
 ﻿using OpenQA.Selenium;
+using SeleniumC_.Helpers;
 using SeleniumExtras.PageObjects;
 
 namespace SeleniumC_.Pages
 {
     public class LoginPage
     {
+        private IWebDriver _driver;
 
-        [FindsBy(How = How.Id, Using = "text")]
-
-        public IWebElement usernameField;
-
-
-        [FindsBy(How = How.Id, Using = "password")]
-
-        public IWebElement passwordField;
-
-
-        [FindsBy(How = How.Id, Using = "login-button")]
-
-        public IWebElement loginButton;
-
-
-        public void EnterCredentials(string username, string password)
+        public LoginPage(IWebDriver driver)
         {
-            usernameField.SendKeys(username);
+            _driver = driver;
+            PageFactory.InitElements(driver, this);
+        }
+
+        [FindsBy(How = How.Name, Using = "email")]
+        private IWebElement emailField;
+
+
+        [FindsBy(How = How.Name, Using = "password")]
+        private IWebElement passwordField;
+
+
+        [FindsBy(How = How.XPath, Using = "(//button[@class='button is-primary'])[1]")]
+        private IWebElement loginButton;
+
+
+        [FindsBy(How = How.Id, Using = "toast-container")]
+        public IWebElement loginErrorMessage;
+
+
+        public void EnterCredentials(string email, string password)
+        {
+            SeleniumHelpers.WaitForDOMToLoad(_driver);
+
+            emailField.SendKeys(email);
             passwordField.SendKeys(password);
         }
 
         public void ClickLogin()
         {
+            SeleniumHelpers.WaitToBeClickable(_driver, loginButton);
             loginButton.Click();
         }
     }
