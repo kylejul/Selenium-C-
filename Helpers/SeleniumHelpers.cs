@@ -30,5 +30,19 @@ namespace SeleniumC_.Helpers
             wait.Until(d => ((IJavaScriptExecutor)d).ExecuteScript("return document.readyState").Equals("complete"));
         }
 
+        public static void SelectDropDownValue(IWebDriver driver, By dropDownLocator, string value, string selectByType)
+        {
+            SelectElement select = new SelectElement(driver.FindElement(dropDownLocator));
+
+            if (selectByType == "value")
+            {
+                select.SelectByValue(value);
+            }
+
+            else
+            {
+                select.SelectByText(value);
+            }
+        }
     }
 }

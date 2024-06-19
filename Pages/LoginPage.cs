@@ -30,6 +30,7 @@ namespace SeleniumC_.Pages
         public IWebElement loginErrorMessage;
 
 
+
         public void EnterCredentials(string email, string password)
         {
             SeleniumHelpers.WaitForDOMToLoad(_driver);

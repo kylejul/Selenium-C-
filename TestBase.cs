@@ -12,6 +12,8 @@ namespace SeleniumC_
         {
             var driverPath = Environment.GetEnvironmentVariable("ChromeDriverPath");
             _driver = new ChromeDriver(driverPath);
+            _driver.Manage().Window.Maximize();
+            _driver.Navigate().GoToUrl("https://letcode.in/test");
         }
 
         [OneTimeTearDown]
