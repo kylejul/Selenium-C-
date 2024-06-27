@@ -1,46 +1,58 @@
-using SeleniumC_.Pages;
-using SeleniumC_.Helpers;
 using OpenQA.Selenium;
-using AventStack.ExtentReports;
+using OpenQA.Selenium.Chrome;
+using SeleniumC_.Helpers;
+using SeleniumC_.Pages;
 
 namespace SeleniumC_
 {
     [TestFixture]
     public class Tests : TestBase
     {
+        private IWebDriver _driver;
 
-        [Test,Order(2)]
-        public void GoToSignIn()
+
+        [SetUp]
+        public void SetupTest()
         {
-            HomePage homePage = new HomePage(_driver);
-            homePage.GoToLoginPage();
-            LogTestStep(_context.Test.Name, Status.Pass, "Navigated to login page successfully");
+            var driverPath = Environment.GetEnvironmentVariable("ChromeDriverPath");
+            _driver = new ChromeDriver(driverPath);
+
+            _driver.Manage().Window.Maximize();
+            _driver.Navigate().GoToUrl("https://letcode.in/test");
+
+            StartExtentTest(TestContext.CurrentContext.Test.Name);
         }
 
-        [Test,Order(3)]
+        [Test]
         public void Login()
         {
-            LoginPage page = new LoginPage(_driver);
+            HomePage homePage = new HomePage(_driver);
+            LoginPage loginPage = new LoginPage(_driver);
 
-            page.EnterCredentials("Jack99@testing.com", "Test123!");
-            LogTestStep(_context.Test.Name, Status.Pass, "Entered login credentials successfully");
-            page.ClickLogin();
-            LogTestStep(_context.Test.Name, Status.Pass, "Login button clicked!");
+            homePage.GoToLoginPage();
+            loginPage.EnterCredentials("Jack99@testing.com", "Test123!");
+            loginPage.ClickLogin();
         }
 
-        [Test, Order(1)]
+        [Test]
         public void SelectDropdownOption()
         {
             HomePage homePage = new HomePage(_driver);
             homePage.GoToDropDownPage();
-            LogTestStep(_context.Test.Name, Status.Pass, "Navigated to dropdown page successfully");
 
             By dropdownLocator = By.CssSelector("[id='fruits']");
 
             SeleniumHelpers.SelectDropDownValue(_driver, dropdownLocator, "Apple", "text");
 
             Assert.That(SeleniumHelpers.IsVisible(_driver.FindElement(dropdownLocator)) == true);
-            LogTestStep(_context.Test.Name, Status.Pass, "Selected Apple from dropdown");
+        }
+
+
+        [TearDown]
+        public void TearDownTest()
+        {
+            LogTestDetails();
+            _driver.Close();
         }
     }
 }
