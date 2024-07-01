@@ -51,7 +51,7 @@ namespace SeleniumC_
         [TearDown]
         public void TearDownTest()
         {
-            LogTestDetails();
+            LogTestDetails(_driver);
             _driver.Close();
         }
     }

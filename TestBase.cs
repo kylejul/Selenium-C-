@@ -1,6 +1,8 @@
 ﻿using AventStack.ExtentReports;
 using AventStack.ExtentReports.Reporter;
 using NUnit.Framework.Interfaces;
+using OpenQA.Selenium;
+using SeleniumC_.Utils;
 
 namespace SeleniumC_
 {
@@ -14,7 +16,7 @@ namespace SeleniumC_
         public void OneTimeSetup()
         {
             string dir = Path.Combine(Directory.GetCurrentDirectory(), "..\\..\\..");
-            var path = Directory.CreateDirectory(dir + "/eReport/").ToString();
+            string path = Directory.CreateDirectory(dir + "/eReport/").ToString();
             ExtentHtmlReporter htmlReporter = new ExtentHtmlReporter(path);
 
             _extentReports = new ExtentReports();
@@ -26,10 +28,10 @@ namespace SeleniumC_
             _test = _extentReports.CreateTest(test);
         }
 
-        public static void LogTestDetails()
+        public static void LogTestDetails(IWebDriver driver)
         {
-            var testStatus = TestContext.CurrentContext.Result.Outcome.Status;
-            var errorMessage = TestContext.CurrentContext.Result.Message;
+            TestStatus testStatus = TestContext.CurrentContext.Result.Outcome.Status;
+            string errorMessage = TestContext.CurrentContext.Result.Message;
 
             switch (testStatus)
             {
@@ -37,7 +39,9 @@ namespace SeleniumC_
                     _test.Log(Status.Skip, "Test was skipped");
                     break;
                 case TestStatus.Failed:
+                    string screenCapture = Screenshots.Capture(driver, TestContext.CurrentContext.Test.Name);
                     _test.Log(Status.Fail, $"Test failed with  {errorMessage}");
+                    _test.Log(Status.Info, "Screenshot: " + _test.AddScreenCaptureFromPath(screenCapture));    
                     break;
                 default:
                     _test.Log(Status.Pass, "The test has finished successfully");
@@ -46,18 +50,10 @@ namespace SeleniumC_
         }
 
 
-        public void LogTestStep(string testName, Status status, string testStepMessage)
-        {
-            _test = _extentReports.CreateTest(testName);
-            _test.Log(status, testStepMessage);
-        }
-
-
         [OneTimeTearDown]
         public void OneTimeTearDown()
         {
             _extentReports.Flush();
         }
-
     }
 }
