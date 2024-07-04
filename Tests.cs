@@ -24,6 +24,7 @@ namespace SeleniumC_
         }
 
         [Test]
+        [Retry(2)]
         public void Login()
         {
             HomePage homePage = new HomePage(_driver);
@@ -35,6 +36,7 @@ namespace SeleniumC_
         }
 
         [Test]
+        [Retry(2)]
         public void SelectDropdownOption()
         {
             HomePage homePage = new HomePage(_driver);

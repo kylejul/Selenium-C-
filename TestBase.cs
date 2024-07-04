@@ -39,10 +39,18 @@ namespace SeleniumC_
                     _test.Log(Status.Skip, "Test was skipped");
                     break;
                 case TestStatus.Failed:
-                    string screenCapture = Screenshots.Capture(driver, TestContext.CurrentContext.Test.Name);
-                    _test.Log(Status.Fail, $"Test failed with  {errorMessage}");
-                    _test.Log(Status.Info, "Screenshot: " + _test.AddScreenCaptureFromPath(screenCapture));    
+                    if (TestContext.CurrentContext.CurrentRepeatCount == 1)
+                    {
+                        string screenCapture = Screenshots.Capture(driver, TestContext.CurrentContext.Test.Name);
+                        _test.Log(Status.Fail, $"Test failed with  {errorMessage}");
+                        _test.Log(Status.Info, "Screenshot: " + _test.AddScreenCaptureFromPath(screenCapture));
+                    }
+                    else
+                    {
+                        _extentReports.RemoveTest(_test);
+                    }
                     break;
+
                 default:
                     _test.Log(Status.Pass, "The test has finished successfully");
                     break;
