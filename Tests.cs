@@ -50,6 +50,23 @@ namespace SeleniumC_
         }
 
 
+        [Test]
+        [Retry(2)]
+        public void ConfirmButtonColour()
+        {
+            HomePage homePage = new HomePage(_driver);
+            homePage.GoToButtonsPage();
+
+            var buttonColour = _driver.FindElement(By.Id("color")).GetCssValue("background-color");
+            string[] rgbaValues = buttonColour.Replace("rgba(", "").Replace(")", "").Split(',');
+            int r = int.Parse(rgbaValues[0].Trim());
+            int g = int.Parse(rgbaValues[1].Trim());
+            int b = int.Parse(rgbaValues[2].Trim());
+            string actualColor = $"#{r:X2}{g:X2}{b:X2}";
+
+            Assert.That(string.Compare(actualColor, "#8a4d76", StringComparison.OrdinalIgnoreCase) == 0);
+        }
+
         [TearDown]
         public void TearDownTest()
         {

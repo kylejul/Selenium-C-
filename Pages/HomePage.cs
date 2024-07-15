@@ -19,6 +19,9 @@ namespace SeleniumC_.Pages
         [FindsBy(How = How.CssSelector, Using = "[href='/dropdowns']")]
         private IWebElement dropDowns;
 
+        [FindsBy(How = How.CssSelector, Using = "[href='/buttons']")]
+        private IWebElement Buttons;
+
 
         public void GoToLoginPage()
         {
@@ -28,6 +31,11 @@ namespace SeleniumC_.Pages
         public void GoToDropDownPage()
         {
             dropDowns.Click();
+        }
+
+        public void GoToButtonsPage()
+        {
+            Buttons.Click();
         }
     }
 }
