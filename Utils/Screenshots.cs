@@ -20,5 +20,11 @@ namespace SeleniumC_.Utils
 
             return relativePath;
         }
+
+        public static void CleanUpScreenShots()
+        {
+            string screenShotsPath = Path.Combine(Directory.GetCurrentDirectory(), "..\\..\\../screenshots");
+            Directory.Delete(screenShotsPath, true);
+        }
     }
 }

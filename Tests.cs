@@ -46,7 +46,7 @@ namespace SeleniumC_
 
             SeleniumHelpers.SelectDropDownValue(_driver, dropdownLocator, "Apple", "text");
 
-            Assert.That(SeleniumHelpers.IsVisible(_driver.FindElement(dropdownLocator)) == true);
+            Assert.That(SeleniumHelpers.IsVisible(_driver.FindElement(dropdownLocator)) == false);
         }
 
 

@@ -11,7 +11,6 @@ namespace SeleniumC_
         protected static ExtentTest _test;
         protected static ExtentReports _extentReports;
    
-
         [OneTimeSetUp]
         public void OneTimeSetup()
         {
@@ -21,6 +20,8 @@ namespace SeleniumC_
 
             _extentReports = new ExtentReports();
             _extentReports.AttachReporter(htmlReporter);
+
+            Screenshots.CleanUpScreenShots();
         }
 
         public static void StartExtentTest(string test)
@@ -50,7 +51,6 @@ namespace SeleniumC_
                         _extentReports.RemoveTest(_test);
                     }
                     break;
-
                 default:
                     _test.Log(Status.Pass, "The test has finished successfully");
                     break;
