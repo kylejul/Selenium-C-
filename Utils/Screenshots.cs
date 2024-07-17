@@ -24,6 +24,9 @@ namespace SeleniumC_.Utils
         public static void CleanUpScreenShots()
         {
             string screenShotsPath = Path.Combine(Directory.GetCurrentDirectory(), "..\\..\\../screenshots");
+
+            if (!Directory.Exists(screenShotsPath)) return;
+
             Directory.Delete(screenShotsPath, true);
         }
     }

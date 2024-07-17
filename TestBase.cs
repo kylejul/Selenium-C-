@@ -10,7 +10,7 @@ namespace SeleniumC_
     {
         protected static ExtentTest _test;
         protected static ExtentReports _extentReports;
-   
+
         [OneTimeSetUp]
         public void OneTimeSetup()
         {
