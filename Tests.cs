@@ -2,6 +2,8 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using SeleniumC_.Helpers;
 using SeleniumC_.Pages;
+using WebDriverManager;
+using WebDriverManager.DriverConfigs.Impl;
 
 namespace SeleniumC_
 {
@@ -14,8 +16,8 @@ namespace SeleniumC_
         [SetUp]
         public void SetupTest()
         {
-            var driverPath = Environment.GetEnvironmentVariable("ChromeDriverPath");
-            _driver = new ChromeDriver(driverPath);
+            new DriverManager().SetUpDriver(new ChromeConfig()); 
+            _driver = new ChromeDriver();
 
             _driver.Manage().Window.Maximize();
             _driver.Navigate().GoToUrl("https://letcode.in/test");
