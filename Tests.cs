@@ -11,6 +11,7 @@ namespace SeleniumC_
     public class Tests : TestBase
     {
         private IWebDriver _driver;
+        private HomePage _homePage;
 
 
         [SetUp]
@@ -22,6 +23,8 @@ namespace SeleniumC_
             _driver.Manage().Window.Maximize();
             _driver.Navigate().GoToUrl("https://letcode.in/test");
 
+            _homePage = new HomePage(_driver);
+
             StartExtentTest(TestContext.CurrentContext.Test.Name);
         }
 
@@ -29,10 +32,9 @@ namespace SeleniumC_
         [Retry(2)]
         public void Login()
         {
-            HomePage homePage = new HomePage(_driver);
             LoginPage loginPage = new LoginPage(_driver);
 
-            homePage.GoToLoginPage();
+            _homePage.GoToLoginPage();
             loginPage.EnterCredentials("Jack99@testing.com", "Test123!");
             loginPage.ClickLogin();
         }
@@ -41,8 +43,7 @@ namespace SeleniumC_
         [Retry(2)]
         public void SelectDropdownOption()
         {
-            HomePage homePage = new HomePage(_driver);
-            homePage.GoToDropDownPage();
+            _homePage.GoToDropDownPage();
 
             By dropdownLocator = By.CssSelector("[id='fruits']");
 
@@ -56,8 +57,7 @@ namespace SeleniumC_
         [Retry(2)]
         public void ConfirmButtonColour()
         {
-            HomePage homePage = new HomePage(_driver);
-            homePage.GoToButtonsPage();
+            _homePage.GoToButtonsPage();
 
             var buttonColour = _driver.FindElement(By.Id("color")).GetCssValue("background-color");
             string[] rgbaValues = buttonColour.Replace("rgba(", "").Replace(")", "").Split(',');
@@ -67,6 +67,13 @@ namespace SeleniumC_
             string actualColor = $"#{r:X2}{g:X2}{b:X2}";
 
             Assert.That(string.Compare(actualColor, "#8a4d76", StringComparison.OrdinalIgnoreCase) == 0);
+        }
+
+        [Test]
+        [Retry(2)]
+        public void ToggleTest()
+        {
+
         }
 
         [TearDown]
