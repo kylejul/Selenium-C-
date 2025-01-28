@@ -71,9 +71,14 @@ namespace SeleniumC_
 
         [Test]
         [Retry(2)]
-        public void ToggleTest()
+        public void ToggleRadioButton()
         {
+            _homePage.GoToTogglesPage();
 
+            var radioButton = _driver.FindElement(By.XPath("//label[contains(text(), 'Select any one')]/following-sibling::input[@id='yes']"));
+            radioButton.Click();    
+            
+            Assert.That(radioButton.Selected, Is.True); 
         }
 
         [TearDown]

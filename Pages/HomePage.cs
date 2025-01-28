@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
 using SeleniumExtras.PageObjects;
+using SeleniumC_.Helpers;
 
 namespace SeleniumC_.Pages
 {
@@ -22,6 +23,9 @@ namespace SeleniumC_.Pages
         [FindsBy(How = How.CssSelector, Using = "[href='/buttons']")]
         private IWebElement Buttons;
 
+        [FindsBy(How = How.CssSelector, Using = "[href='/radio']")]
+        private IWebElement Toggles;
+
 
         public void GoToLoginPage()
         {
@@ -36,6 +40,12 @@ namespace SeleniumC_.Pages
         public void GoToButtonsPage()
         {
             Buttons.Click();
+        }
+
+        public void GoToTogglesPage()
+        {
+            SeleniumHelpers.WaitForDOMToLoad(_driver);
+            Toggles.Click();
         }
     }
 }
