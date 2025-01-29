@@ -75,7 +75,7 @@ namespace SeleniumC_
         {
             _homePage.GoToTogglesPage();
 
-            var radioButton = _driver.FindElement(By.XPath("//label[contains(text(), 'Select any one')]/following-sibling::input[@id='yes']"));
+            var radioButton = _driver.FindElement(By.XPath("//label[contains(text(), 'Select any one')]/ancestor::*//input[@id='yes']"));
             radioButton.Click();    
             
             Assert.That(radioButton.Selected, Is.True); 

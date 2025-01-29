@@ -44,8 +44,7 @@ namespace SeleniumC_.Pages
 
         public void GoToTogglesPage()
         {
-            SeleniumHelpers.WaitForDOMToLoad(_driver);
-            Toggles.Click();
+            ((IJavaScriptExecutor)_driver).ExecuteScript("arguments[0].click();", Toggles);
         }
     }
 }
