@@ -23,4 +23,4 @@ jobs:
       run: dotnet build --configuration Release --no-restore
 
     - name: Run Tests
-      run: dotnet test --filter Category=Radio Buttons --no-build
+      run: dotnet test --filter "Category=Radio Buttons" --no-build
