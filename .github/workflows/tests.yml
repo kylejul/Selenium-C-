@@ -20,7 +20,7 @@ jobs:
       run: dotnet restore
 
     - name: Build the project
-      run: dotnet build --configuration Release --no-restore
+      run: dotnet build --configuration Debug
 
     - name: Run Tests
       run: dotnet test --filter "Category=Radio Buttons" --no-build
