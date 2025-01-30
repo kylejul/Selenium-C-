@@ -70,8 +70,9 @@ namespace SeleniumC_
         }
 
         [Test]
+        [Category("Radio Buttons")]
         [Retry(2)]
-        public void ToggleRadioButton()
+        public void ToggleYes()
         {
             _homePage.GoToTogglesPage();
 
@@ -79,6 +80,18 @@ namespace SeleniumC_
             radioButton.Click();    
             
             Assert.That(radioButton.Selected, Is.True); 
+        }
+
+        [Test]
+        [Category("Radio Buttons")]
+        [Retry(2)]
+        public void RadioDisabled()
+        {
+            _homePage.GoToTogglesPage();
+
+            var disabledRadio = _driver.FindElement(By.XPath("//label[contains(text(), 'Confirm last field is disabled')]/ancestor::*//input[@id='maybe']"));
+            
+            Assert.That(disabledRadio.Enabled, Is.False);
         }
 
         [TearDown]
