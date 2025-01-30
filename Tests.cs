@@ -70,7 +70,7 @@ namespace SeleniumC_
         }
 
         [Test]
-        [Category("Radio Buttons")]
+        [Category("RadioButtons")]
         [Retry(2)]
         public void ToggleYes()
         {
@@ -83,7 +83,7 @@ namespace SeleniumC_
         }
 
         [Test]
-        [Category("Radio Buttons")]
+        [Category("RadioButtons")]
         [Retry(2)]
         public void RadioDisabled()
         {
