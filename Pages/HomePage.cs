@@ -26,6 +26,9 @@ namespace SeleniumC_.Pages
         [FindsBy(How = How.CssSelector, Using = "[href='/radio']")]
         private IWebElement Toggles;
 
+        [FindsBy(How = How.CssSelector, Using = "[href='/alert']")]
+        private IWebElement Alerts;
+
 
         public void GoToLoginPage()
         {
@@ -45,6 +48,12 @@ namespace SeleniumC_.Pages
         public void GoToTogglesPage()
         {
             ((IJavaScriptExecutor)_driver).ExecuteScript("arguments[0].click();", Toggles);
+        }  
+        
+        public void GoToAlertsPage()
+        {
+            Alerts.Click();
         }
+
     }
 }

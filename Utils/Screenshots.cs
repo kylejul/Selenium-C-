@@ -4,6 +4,12 @@ namespace SeleniumC_.Utils
 {
     public class Screenshots
     {
+        /// <summary>
+        /// Takes a screenshot of the webpage
+        /// </summary>
+        /// <param name="driver">Webdriver instance</param>
+        /// <param name="screenShotName">Description of the screenshot</param>
+        /// <returns>Path to the saved screenshot</returns>
         public static string Capture(IWebDriver driver, string screenShotName)
         {
             ITakesScreenshot takesScreenshot = (ITakesScreenshot)driver;
@@ -21,6 +27,9 @@ namespace SeleniumC_.Utils
             return relativePath;
         }
 
+        /// <summary>
+        /// Deletes all saved screenshots
+        /// </summary>
         public static void CleanUpScreenShots()
         {
             string screenShotsPath = Path.Combine(Directory.GetCurrentDirectory(), "..\\..\\../screenshots");

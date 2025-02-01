@@ -15,7 +15,7 @@ namespace SeleniumC_
 
 
         [SetUp]
-        public void SetupTest()
+        public void Setup()
         {
             new DriverManager().SetUpDriver(new ChromeConfig()); 
             _driver = new ChromeDriver();
@@ -40,13 +40,13 @@ namespace SeleniumC_
         }
 
         [Test]
+        [Category("Dropdowns")]
         [Retry(2)]
         public void SelectDropdownOption()
         {
             _homePage.GoToDropDownPage();
 
             By dropdownLocator = By.CssSelector("[id='fruits']");
-
             SeleniumHelpers.SelectDropDownValue(_driver, dropdownLocator, "Apple", "text");
 
             Assert.That(SeleniumHelpers.IsVisible(_driver.FindElement(dropdownLocator)) == true);
@@ -54,6 +54,7 @@ namespace SeleniumC_
 
 
         [Test]
+        [Category("Buttons")]
         [Retry(2)]
         public void ConfirmButtonColour()
         {
@@ -90,8 +91,37 @@ namespace SeleniumC_
             _homePage.GoToTogglesPage();
 
             var disabledRadio = _driver.FindElement(By.XPath("//label[contains(text(), 'Confirm last field is disabled')]/ancestor::*//input[@id='maybe']"));
-            
             Assert.That(disabledRadio.Enabled, Is.False);
+        } 
+        
+        [Test]
+        [Category("Alerts")]
+        [Retry(2)]
+        public void AcceptAlert()
+        {
+            _homePage.GoToAlertsPage();
+
+            _driver.FindElement(By.Id("accept")).Click();
+
+            IAlert alert = _driver.SwitchTo().Alert();
+            alert.Accept();
+        } 
+        
+        [Test]
+        [Category("Alerts")]
+        [Retry(2)]
+        public void PromptAlert()
+        {
+            _homePage.GoToAlertsPage();
+
+            _driver.FindElement(By.Id("prompt")).Click();
+
+            IAlert alert = _driver.SwitchTo().Alert();
+            alert.SendKeys("Kyle");
+            alert.Accept();
+
+            var promptText = _driver.FindElement(By.Id("myName")).Text;
+            Assert.That(promptText.Contains("Kyle"), "Prompt text does not contain " + "Kyle");
         }
 
         [TearDown]
