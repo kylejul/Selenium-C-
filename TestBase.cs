@@ -24,12 +24,12 @@ namespace SeleniumC_
             Screenshots.CleanUpScreenShots();
         }
 
-        public static void StartExtentTest(string test)
+        protected static void StartExtentTest(string test)
         {
             _test = _extentReports.CreateTest(test);
         }
 
-        public static void LogTestDetails(IWebDriver driver)
+        protected static void LogTestDetails(IWebDriver driver)
         {
             TestStatus testStatus = TestContext.CurrentContext.Result.Outcome.Status;
             string errorMessage = TestContext.CurrentContext.Result.Message;
