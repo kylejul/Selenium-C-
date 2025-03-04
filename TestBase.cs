@@ -16,7 +16,7 @@ namespace SeleniumC_
         {
             string dir = Path.Combine(Directory.GetCurrentDirectory(), "..\\..\\..");
             string path = Directory.CreateDirectory(dir + "/eReport/").ToString();
-            ExtentHtmlReporter htmlReporter = new ExtentHtmlReporter(path);
+            ExtentHtmlReporter htmlReporter = new(path);
 
             _extentReports = new ExtentReports();
             _extentReports.AttachReporter(htmlReporter);

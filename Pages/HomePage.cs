@@ -1,10 +1,10 @@
 ﻿using OpenQA.Selenium;
+using SeleniumC_.Interfaces;
 using SeleniumExtras.PageObjects;
-using SeleniumC_.Helpers;
 
 namespace SeleniumC_.Pages
 {
-    public class HomePage
+    public class HomePage : IPage
     {
         private IWebDriver _driver;
 
@@ -20,7 +20,7 @@ namespace SeleniumC_.Pages
         [FindsBy(How = How.CssSelector, Using = "[href='/dropdowns']")]
         private IWebElement dropDowns;
 
-        [FindsBy(How = How.CssSelector, Using = "[href='/buttons']")]
+        [FindsBy(How = How.CssSelector, Using = "[href='/button']")]
         private IWebElement Buttons;
 
         [FindsBy(How = How.CssSelector, Using = "[href='/radio']")]
@@ -38,6 +38,11 @@ namespace SeleniumC_.Pages
         public void GoToDropDownPage()
         {
             dropDowns.Click();
+        }
+
+        public string GetText(By locator)
+        {
+            return _driver.FindElement(locator).Text;
         }
 
         public void GoToButtonsPage()

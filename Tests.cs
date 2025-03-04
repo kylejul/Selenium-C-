@@ -1,3 +1,4 @@
+
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using SeleniumC_.Helpers;
@@ -67,7 +68,7 @@ namespace SeleniumC_
             int b = int.Parse(rgbaValues[2].Trim());
             string actualColor = $"#{r:X2}{g:X2}{b:X2}";
 
-            Assert.That(string.Compare(actualColor, "#8a4d76", StringComparison.OrdinalIgnoreCase) == 0);
+            Assert.That(string.Compare(actualColor, "#2A9D90", StringComparison.OrdinalIgnoreCase) == 0);
         }
 
         [Test]
@@ -120,7 +121,7 @@ namespace SeleniumC_
             alert.SendKeys("Kyle");
             alert.Accept();
 
-            var promptText = _driver.FindElement(By.Id("myName")).Text;
+            var promptText = _homePage.GetText(By.Id("myName"));
             Assert.That(promptText.Contains("Kyle"), "Prompt text does not contain " + "Kyle");
         }
 

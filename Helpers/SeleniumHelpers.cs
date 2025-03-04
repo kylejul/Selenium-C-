@@ -14,7 +14,7 @@ namespace SeleniumC_.Helpers
         /// <param name="waitTimeout">Amount of time to wait in seconds</param>
         public static void WaitToBeClickable(IWebDriver driver, IWebElement element, int waitTimeout = 15)
         {
-            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(waitTimeout));
+            WebDriverWait wait = new(driver, TimeSpan.FromSeconds(waitTimeout));
             wait.Until(ExpectedConditions.ElementToBeClickable(element));
         }
 
@@ -37,7 +37,7 @@ namespace SeleniumC_.Helpers
         /// <param name="waitTimeout">Amount of time to wait in seconds</param>
         public static void WaitToBeVisible(IWebDriver driver, By locator ,int waitTimeout = 10)
         {
-            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(waitTimeout));
+            WebDriverWait wait = new(driver, TimeSpan.FromSeconds(waitTimeout));
             wait.Until(ExpectedConditions.ElementIsVisible(locator));
         }
 
@@ -47,7 +47,7 @@ namespace SeleniumC_.Helpers
         /// <param name="driver">Webdriver instance</param>
         public static void WaitForDOMToLoad(IWebDriver driver)
         {
-            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(15));
+            WebDriverWait wait = new(driver, TimeSpan.FromSeconds(15));
             wait.Until(d => ((IJavaScriptExecutor)d).ExecuteScript("return document.readyState").Equals("complete"));
         }
 
@@ -60,7 +60,7 @@ namespace SeleniumC_.Helpers
         /// <param name="selectByType">Select by value or text</param>
         public static void SelectDropDownValue(IWebDriver driver, By dropDownLocator, string value, string selectByType = "value")
         {
-            SelectElement select = new SelectElement(driver.FindElement(dropDownLocator));
+            SelectElement select = new(driver.FindElement(dropDownLocator));
 
             if (selectByType == "value")
             {
