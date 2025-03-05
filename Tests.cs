@@ -37,7 +37,10 @@ namespace SeleniumC_
 
             _homePage.GoToLoginPage();
             loginPage.EnterCredentials("Jack99@testing.com", "Test123!");
-            loginPage.ClickLogin();
+            loginPage.ClickSubmit();
+
+            SeleniumHelpers.WaitToBeVisible(_driver, By.Id("error"));
+            Assert.That(_homePage.GetText(By.Id("error")) == "Your username is invalid!");
         }
 
         [Test]

@@ -32,7 +32,7 @@ namespace SeleniumC_.Pages
 
         public void GoToLoginPage()
         {
-            loginButton.Click();
+            _driver.Navigate().GoToUrl("https://practicetestautomation.com/practice-test-login/");
         }
 
         public void GoToDropDownPage()
