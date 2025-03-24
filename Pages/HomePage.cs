@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using SeleniumC_.Helpers;
 using SeleniumC_.Interfaces;
 using SeleniumExtras.PageObjects;
 
@@ -14,11 +15,11 @@ namespace SeleniumC_.Pages
             PageFactory.InitElements(driver, this);
         }
 
-        [FindsBy(How = How.CssSelector, Using = "[href='/signin']")]
-        private IWebElement loginButton;
+        [FindsBy(How = How.CssSelector, Using = "[href='/selectable']")]
+        private IWebElement MultiSelect;
 
         [FindsBy(How = How.CssSelector, Using = "[href='/dropdowns']")]
-        private IWebElement dropDowns;
+        private IWebElement DropDowns;
 
         [FindsBy(How = How.CssSelector, Using = "[href='/button']")]
         private IWebElement Buttons;
@@ -37,7 +38,12 @@ namespace SeleniumC_.Pages
 
         public void GoToDropDownPage()
         {
-            dropDowns.Click();
+            DropDowns.Click();
+        } 
+        
+        public void GoToMultiSelectPage()
+        {
+           ((IJavaScriptExecutor)_driver).ExecuteScript("arguments[0].click();", MultiSelect);
         }
 
         public string GetText(By locator)

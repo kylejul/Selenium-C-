@@ -126,6 +126,31 @@ namespace SeleniumC_
 
             var promptText = _homePage.GetText(By.Id("myName"));
             Assert.That(promptText.Contains("Kyle"), "Prompt text does not contain " + "Kyle");
+        } 
+        
+        [Test]
+        [Retry(2)]
+        public void SelectMultiple()
+        {
+            _homePage.GoToMultiSelectPage();
+
+            //get list of elements and remove heading element from the list 
+            IList<IWebElement> listItems = new List<IWebElement>(_driver.FindElements(By.CssSelector("#container div[_ngcontent-ng-c2495081635]")));
+            listItems.RemoveAt(0);
+
+            //Click on all elements from the list 
+            foreach (var item in listItems)
+            {
+                item.Click();
+            }
+
+            //Assert that all elements are selected 
+            foreach (var item in listItems)
+            {
+                bool isSelected = item.GetAttribute("class").Contains("selected");
+
+                Assert.That(isSelected, Is.EqualTo(true));
+            }
         }
 
         [TearDown]
