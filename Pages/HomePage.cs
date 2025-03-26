@@ -1,5 +1,4 @@
 ﻿using OpenQA.Selenium;
-using SeleniumC_.Helpers;
 using SeleniumC_.Interfaces;
 using SeleniumExtras.PageObjects;
 
@@ -17,6 +16,9 @@ namespace SeleniumC_.Pages
 
         [FindsBy(How = How.CssSelector, Using = "[href='/selectable']")]
         private IWebElement MultiSelect;
+        
+        [FindsBy(How = How.CssSelector, Using = "[href='/calendar']")]
+        private IWebElement Calendar;
 
         [FindsBy(How = How.CssSelector, Using = "[href='/dropdowns']")]
         private IWebElement DropDowns;
@@ -64,7 +66,11 @@ namespace SeleniumC_.Pages
         public void GoToAlertsPage()
         {
             Alerts.Click();
+        } 
+        
+        public void GoToCalendarPage()
+        {
+            ((IJavaScriptExecutor)_driver).ExecuteScript("arguments[0].click();", Calendar);
         }
-
     }
 }

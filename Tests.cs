@@ -151,7 +151,25 @@ namespace SeleniumC_
 
                 Assert.That(isSelected, Is.EqualTo(true));
             }
+        }   
+        
+        [Test]
+        [Retry(2)]
+        public void SelectBirthDate()
+        {
+            _homePage.GoToCalendarPage();
+
+            IWebElement birthDateField = _driver.FindElement(By.Id("birthday"));
+
+            string birthDate = DateTime.Today.AddYears(-30).ToString("MM/dd/yyyy");
+            birthDateField.SendKeys(birthDate);
+
+            string displayedDate = _driver.FindElement(By.XPath("//*[@class='label pt-3']")).Text;
+            string formattedDisplayedDate = DateTime.Parse(displayedDate).ToString("MM/dd/yyyy");
+
+            Assert.That(formattedDisplayedDate, Is.EqualTo(birthDate));
         }
+
 
         [TearDown]
         public void TearDownTest()
