@@ -1,6 +1,7 @@
 ﻿using OpenQA.Selenium;
 using SeleniumC_.Interfaces;
 using SeleniumExtras.PageObjects;
+using SeleniumC_.Helpers;
 
 namespace SeleniumC_.Pages
 {
@@ -45,7 +46,7 @@ namespace SeleniumC_.Pages
         
         public void GoToMultiSelectPage()
         {
-           ((IJavaScriptExecutor)_driver).ExecuteScript("arguments[0].click();", MultiSelect);
+            SeleniumHelpers.Click(_driver, MultiSelect);
         }
 
         public string GetText(By locator)
@@ -60,7 +61,7 @@ namespace SeleniumC_.Pages
 
         public void GoToTogglesPage()
         {
-            ((IJavaScriptExecutor)_driver).ExecuteScript("arguments[0].click();", Toggles);
+            SeleniumHelpers.Click(_driver, Toggles);
         }  
         
         public void GoToAlertsPage()
@@ -70,7 +71,7 @@ namespace SeleniumC_.Pages
         
         public void GoToCalendarPage()
         {
-            ((IJavaScriptExecutor)_driver).ExecuteScript("arguments[0].click();", Calendar);
+            SeleniumHelpers.Click(_driver, Calendar);
         }
     }
 }

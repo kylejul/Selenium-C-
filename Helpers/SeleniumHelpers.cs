@@ -19,6 +19,16 @@ namespace SeleniumC_.Helpers
         }
 
         /// <summary>
+        /// Performs a click event directly on the element using Javascript 
+        /// </summary>
+        /// <param name="driver">Webdriver instance</param>
+        /// <param name="element">The web element</param>
+        public static void Click(IWebDriver driver, IWebElement element)
+        {
+            ((IJavaScriptExecutor)driver).ExecuteScript("arguments[0].click();", element);
+        }
+
+        /// <summary>
         /// Check if the element is visible on the webpage
         /// </summary>
         /// <param name="element">The web element</param>
