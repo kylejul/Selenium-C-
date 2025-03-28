@@ -1,6 +1,7 @@
 
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Interactions;
 using SeleniumC_.Helpers;
 using SeleniumC_.Pages;
 using WebDriverManager;
@@ -168,6 +169,24 @@ namespace SeleniumC_
             string formattedDisplayedDate = DateTime.Parse(displayedDate).ToString("MM/dd/yyyy");
 
             Assert.That(formattedDisplayedDate, Is.EqualTo(birthDate));
+        }  
+        
+        [Test]
+        [Retry(2)]
+        public void DragDropTest()
+        {
+            _homePage.GoToDropPage();
+
+            IWebElement sourceElement = _driver.FindElement(By.Id("draggable"));
+
+            IWebElement targetElement = _driver.FindElement(By.Id("droppable"));
+
+            Actions actions = new(_driver);
+            actions.DragAndDrop(sourceElement, targetElement).Build().Perform();
+
+            bool isDropped = targetElement.Text.Contains("Drag me to my target");
+
+            Assert.That(isDropped, Is.EqualTo(true));
         }
 
 

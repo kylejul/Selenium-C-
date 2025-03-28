@@ -18,6 +18,9 @@ namespace SeleniumC_.Pages
         [FindsBy(How = How.CssSelector, Using = "[href='/selectable']")]
         private IWebElement MultiSelect;
         
+        [FindsBy(How = How.CssSelector, Using = "[href='/droppable']")]
+        private IWebElement Drop;
+        
         [FindsBy(How = How.CssSelector, Using = "[href='/calendar']")]
         private IWebElement Calendar;
 
@@ -72,6 +75,11 @@ namespace SeleniumC_.Pages
         public void GoToCalendarPage()
         {
             SeleniumHelpers.Click(_driver, Calendar);
+        }  
+        
+        public void GoToDropPage()
+        {
+            SeleniumHelpers.Click(_driver, Drop);
         }
     }
 }
