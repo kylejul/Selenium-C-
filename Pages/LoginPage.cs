@@ -1,13 +1,12 @@
 ﻿using OpenQA.Selenium;
 using SeleniumC_.Helpers;
-using SeleniumC_.Interfaces;
 using SeleniumExtras.PageObjects;
 
 namespace SeleniumC_.Pages
 {
     public class LoginPage
     {
-        private IWebDriver _driver;
+        private readonly IWebDriver _driver;
 
         public LoginPage(IWebDriver driver)
         {
@@ -16,15 +15,15 @@ namespace SeleniumC_.Pages
         }
 
         [FindsBy(How = How.Name, Using = "username")]
-        private IWebElement usernameField;
+        private readonly IWebElement usernameField;
 
 
         [FindsBy(How = How.Name, Using = "password")]
-        private IWebElement passwordField;
+        private readonly IWebElement passwordField;
 
 
         [FindsBy(How = How.Id, Using = "submit")]
-        private IWebElement submitButton;
+        private readonly IWebElement submitButton;
 
 
         public void EnterCredentials(string email, string password)

@@ -12,7 +12,7 @@ namespace SeleniumC_
     [TestFixture]
     public class Tests : TestBase
     {
-        private IWebDriver _driver;
+        private ChromeDriver _driver;
         private HomePage _homePage;
 
 
@@ -34,14 +34,14 @@ namespace SeleniumC_
         [Retry(2)]
         public void Login()
         {
-            LoginPage loginPage = new LoginPage(_driver);
+            LoginPage loginPage = new(_driver);
 
             _homePage.GoToLoginPage();
             loginPage.EnterCredentials("Jack99@testing.com", "Test123!");
             loginPage.ClickSubmit();
 
             SeleniumHelpers.WaitToBeVisible(_driver, By.Id("error"));
-            Assert.That(_homePage.GetText(By.Id("error")) == "Your username is invalid!");
+            Assert.That(_homePage.GetText(By.Id("error")), Is.EqualTo("Your username is invalid!"));
         }
 
         [Test]
@@ -54,7 +54,7 @@ namespace SeleniumC_
             By dropdownLocator = By.CssSelector("[id='fruits']");
             SeleniumHelpers.SelectDropDownValue(_driver, dropdownLocator, "Apple", "text");
 
-            Assert.That(SeleniumHelpers.IsVisible(_driver.FindElement(dropdownLocator)) == true);
+            Assert.That(SeleniumHelpers.IsVisible(_driver.FindElement(dropdownLocator)), Is.True);
         }
 
 
@@ -72,7 +72,7 @@ namespace SeleniumC_
             int b = int.Parse(rgbaValues[2].Trim());
             string actualColor = $"#{r:X2}{g:X2}{b:X2}";
 
-            Assert.That(string.Compare(actualColor, "#2A9D90", StringComparison.OrdinalIgnoreCase) == 0);
+            Assert.That(string.Equals(actualColor, "#2A9D90", StringComparison.OrdinalIgnoreCase));
         }
 
         [Test]
@@ -150,7 +150,7 @@ namespace SeleniumC_
             {
                 bool isSelected = item.GetAttribute("class").Contains("selected");
 
-                Assert.That(isSelected, Is.EqualTo(true));
+                Assert.That(isSelected, Is.True);
             }
         }   
         
@@ -186,7 +186,7 @@ namespace SeleniumC_
 
             bool isDropped = targetElement.Text.Contains("Drag me to my target");
 
-            Assert.That(isDropped, Is.EqualTo(true));
+            Assert.That(isDropped, Is.True);
         }
 
 

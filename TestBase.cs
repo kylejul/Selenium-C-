@@ -8,8 +8,8 @@ namespace SeleniumC_
 {
     public class TestBase
     {
-        protected static ExtentTest _test;
-        protected static ExtentReports _extentReports;
+        private static ExtentTest _test = null!;
+        private static ExtentReports _extentReports;
 
         [OneTimeSetUp]
         public void OneTimeSetup()
@@ -26,7 +26,7 @@ namespace SeleniumC_
 
         protected static void StartExtentTest(string test)
         {
-            _test = _extentReports.CreateTest(test);
+            _test = _extentReports?.CreateTest(test) ?? throw new InvalidOperationException("ExtentReports is not initialized.");
         }
 
         protected static void LogTestDetails(IWebDriver driver)

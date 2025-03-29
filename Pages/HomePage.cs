@@ -7,7 +7,7 @@ namespace SeleniumC_.Pages
 {
     public class HomePage : IPage
     {
-        private IWebDriver _driver;
+        private readonly IWebDriver _driver;
 
         public HomePage(IWebDriver driver)
         {
@@ -16,25 +16,25 @@ namespace SeleniumC_.Pages
         }
 
         [FindsBy(How = How.CssSelector, Using = "[href='/selectable']")]
-        private IWebElement MultiSelect;
+        private readonly IWebElement MultiSelect;
         
         [FindsBy(How = How.CssSelector, Using = "[href='/droppable']")]
-        private IWebElement Drop;
+        private readonly IWebElement Drop;
         
         [FindsBy(How = How.CssSelector, Using = "[href='/calendar']")]
-        private IWebElement Calendar;
+        private readonly IWebElement Calendar;
 
         [FindsBy(How = How.CssSelector, Using = "[href='/dropdowns']")]
-        private IWebElement DropDowns;
+        private readonly IWebElement DropDowns;
 
         [FindsBy(How = How.CssSelector, Using = "[href='/button']")]
-        private IWebElement Buttons;
+        private readonly IWebElement Buttons;
 
         [FindsBy(How = How.CssSelector, Using = "[href='/radio']")]
-        private IWebElement Toggles;
+        private readonly IWebElement Toggles;
 
         [FindsBy(How = How.CssSelector, Using = "[href='/alert']")]
-        private IWebElement Alerts;
+        private readonly IWebElement Alerts;
 
 
         public void GoToLoginPage()
